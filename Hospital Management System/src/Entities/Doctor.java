@@ -1,6 +1,7 @@
 package Entities;
 
 import Interfaces.Displayable;
+import Utils.HelperUtils;
 import Utils.InputHandler;
 
 import java.time.LocalDate;
@@ -53,6 +54,10 @@ public class Doctor extends Person implements Displayable {
     }
 
     public void setConsultationFee(Double consultationFee) {
+        while (!HelperUtils.isPositive(consultationFee)){
+            System.out.println("Invalid consultation fee. It must be positive.");
+            consultationFee = InputHandler.getDoubleInput("Enter consultation fee: ");
+        }
         this.consultationFee = consultationFee;
     }
 
@@ -93,10 +98,6 @@ public class Doctor extends Person implements Displayable {
     }
 
     public void setSpecialization(String specialization) {
-        while (specialization == null || specialization.trim().isEmpty()) {
-            System.out.println("Specialization cannot be empty.");
-            specialization = InputHandler.getStringInput("Enter Specialization: ");
-        }
         this.specialization = specialization;
     }
 

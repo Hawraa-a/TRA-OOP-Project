@@ -44,6 +44,9 @@ public class Person implements Displayable {
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
+        while (!dateOfBirth.isBefore(LocalDate.now())) {
+            dateOfBirth = InputHandler.getDateInput("Invalid date of birth. Please enter a valid past date");
+        }
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -52,6 +55,11 @@ public class Person implements Displayable {
     }
 
     public void setEmail(String email) {
+        String regex = "^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$";
+        while (HelperUtils.isNull(email) || !email.matches(regex)) {
+            System.out.println("Invalid email format. Please enter a valid email (example@mail.com).");
+            email = InputHandler.getStringInput("Enter Email: ");
+        }
         this.email = email;
     }
 
@@ -68,6 +76,9 @@ public class Person implements Displayable {
     }
 
     public void setGender(String gender) {
+        while (HelperUtils.isNull(gender) || !(gender.equalsIgnoreCase("Male") || gender.equalsIgnoreCase("Female"))) {
+            gender = InputHandler.getStringInput("Invalid gender. Please enter 'Male' or 'Female': ");
+        }
         this.gender = gender;
     }
 

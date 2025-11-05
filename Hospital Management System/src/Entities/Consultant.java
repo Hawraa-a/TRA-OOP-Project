@@ -11,11 +11,11 @@ public class Consultant extends Doctor implements Displayable {
     private boolean onlineConsultationAvailable;
     private Integer consultationDuration;
 
-    public Consultant(String address, LocalDate dateOfBirth, String email, String firsName, String gender, String id, String lastName, String phoneNumber, List<Patient> assignedPatients, List<String> availableSlots, Double consultationFee, String departmentId, String doctorId, Integer experienceYears, String qualification, String specialization) {
+    public Consultant(String address, LocalDate dateOfBirth, String email, String firsName, String gender, String id, String lastName, String phoneNumber, List<Patient> assignedPatients, List<String> availableSlots, Double consultationFee, String departmentId, String doctorId, Integer experienceYears, String qualification, String specialization, Integer consultationDuration, List<String> consultationTypes, boolean onlineConsultationAvailable) {
         super(address, dateOfBirth, email, firsName, gender, id, lastName, phoneNumber, assignedPatients, availableSlots, consultationFee, departmentId, doctorId, experienceYears, qualification, specialization);
-        this.consultationTypes = new ArrayList<>();
-        this.onlineConsultationAvailable = onlineConsultationAvailable;
         this.consultationDuration = consultationDuration;
+        this.consultationTypes = consultationTypes;
+        this.onlineConsultationAvailable = onlineConsultationAvailable;
     }
 
     public Consultant() {
@@ -47,7 +47,12 @@ public class Consultant extends Doctor implements Displayable {
     }
 
     public void scheduleConsultation(String type) {
-        consultationTypes.add(type);
+        if (type != null) {
+            consultationTypes.add(type);
+            System.out.println("Consultation type '" + type + "' scheduled successfully.");
+        } else {
+            System.out.println("Invalid consultation type.");
+        }
     }
 
     public void provideSecondOpinion(Patient patient) {

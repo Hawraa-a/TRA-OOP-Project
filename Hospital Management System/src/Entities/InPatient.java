@@ -2,6 +2,7 @@ package Entities;
 
 import Interfaces.Billable;
 import Interfaces.Displayable;
+import Utils.InputHandler;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -34,6 +35,10 @@ public class InPatient extends Patient implements Displayable, Billable {
     }
 
     public void setAdmissionDate(LocalDate admissionDate) {
+        while ((getRegistrationDate() != null && admissionDate.isBefore(getRegistrationDate())) || admissionDate.isAfter(LocalDate.now())) {
+            System.out.println("Invalid admission date. It cannot be before registration or in the future.");
+            admissionDate = InputHandler.getDateInput("Enter Admission Date: ");
+        }
         this.admissionDate = admissionDate;
     }
 
@@ -42,6 +47,10 @@ public class InPatient extends Patient implements Displayable, Billable {
     }
 
     public void setDischargeDate(LocalDate dischargeDate) {
+        while (admissionDate != null && dischargeDate.isBefore(admissionDate)){
+            System.out.println("Invalid discharge date. It must be after admission.");
+            dischargeDate = InputHandler.getDateInput("Enter Discharge Date: ");
+        }
         this.dischargeDate = dischargeDate;
     }
 

@@ -1,6 +1,7 @@
 package Entities;
 
 import Interfaces.Displayable;
+import Utils.InputHandler;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,6 +35,10 @@ public class OutPatient extends Patient implements Displayable {
     }
 
     public void setLastVisitDate(LocalDate lastVisitDate) {
+        while (lastVisitDate.isBefore(getRegistrationDate()) || lastVisitDate.isAfter(LocalDate.now())) {
+            System.out.println("Invalid last visit date. It cannot be before registration or in the future.");
+            lastVisitDate = InputHandler.getDateInput("Enter Last Visit Date: ");
+        }
         this.lastVisitDate = lastVisitDate;
     }
 
@@ -54,10 +59,13 @@ public class OutPatient extends Patient implements Displayable {
     }
 
     public void scheduleFollowUp(LocalDate visitDate) {
-
+        setLastVisitDate(visitDate);
+        setVisitCount(getVisitCount() + 1);
+        System.out.println("Follow-up scheduled successfully. Visit count updated to " + visitCount);
     }
 
     public void updateVisitCount(int visits) {
-        this.visitCount = visits;
+        setVisitCount(visits);
+        System.out.println("Visit count updated successfully to " + visitCount);
     }
 }

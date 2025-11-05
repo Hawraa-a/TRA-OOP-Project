@@ -11,7 +11,7 @@ import java.util.List;
 public class Patient extends Person implements Displayable {
     private String patientId;
     private String bloodGroup;
-    private List<String> allergies;
+    private List<String> allergies = new ArrayList<>();
     private String emergencyContact;
     private LocalDate registrationDate;
     private String insuranceId;
@@ -105,7 +105,7 @@ public class Patient extends Person implements Displayable {
     }
 
     public void setRegistrationDate(LocalDate registrationDate) {
-        while (registrationDate.isBefore(getDateOfBirth())) {
+        while (registrationDate.isBefore(getDateOfBirth()) || registrationDate.isAfter(LocalDate.now())) {
             System.out.println("Registration date cannot be before date of birth.");
             registrationDate = InputHandler.getDateInput("Enter Registration Date: ");
         }

@@ -10,11 +10,11 @@ public class GeneralPractitioner extends Doctor implements Displayable {
     private boolean homeVisitAvailable;
     private boolean vaccinationCertified;
 
-    public GeneralPractitioner(String address, LocalDate dateOfBirth, String email, String firsName, String gender, String id, String lastName, String phoneNumber, List<Patient> assignedPatients, List<String> availableSlots, Double consultationFee, String departmentId, String doctorId, Integer experienceYears, String qualification, String specialization) {
+    public GeneralPractitioner(String address, LocalDate dateOfBirth, String email, String firsName, String gender, String id, String lastName, String phoneNumber, List<Patient> assignedPatients, List<String> availableSlots, Double consultationFee, String departmentId, String doctorId, Integer experienceYears, String qualification, String specialization, boolean homeVisitAvailable, boolean vaccinationCertified, boolean walkinAvailable) {
         super(address, dateOfBirth, email, firsName, gender, id, lastName, phoneNumber, assignedPatients, availableSlots, consultationFee, departmentId, doctorId, experienceYears, qualification, specialization);
-        this.walkinAvailable = walkinAvailable;
         this.homeVisitAvailable = homeVisitAvailable;
         this.vaccinationCertified = vaccinationCertified;
+        this.walkinAvailable = walkinAvailable;
     }
 
     public GeneralPractitioner() {

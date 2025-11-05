@@ -5,6 +5,7 @@ import Utils.InputHandler;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Appointment implements Displayable {
     private String appointmentId;
@@ -96,7 +97,8 @@ public class Appointment implements Displayable {
     }
 
     public void setStatus(String status) {
-        while (!status.equalsIgnoreCase("Scheduled") && !status.equalsIgnoreCase("Rescheduled") && !status.equalsIgnoreCase("Complete") && !status.equalsIgnoreCase("Cancelled")) {
+        List<String> validStatus = List.of("Scheduled", "Rescheduled", "Complete","Cancelled");
+        while (!validStatus.contains(status)) {
             System.out.println("Invalid status. Must be Scheduled, Rescheduled, Complete, or Cancelled.");
             status = Utils.InputHandler.getStringInput("Enter appointment status: ");
         }
