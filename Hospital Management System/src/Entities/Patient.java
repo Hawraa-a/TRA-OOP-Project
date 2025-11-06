@@ -106,7 +106,7 @@ public class Patient extends Person implements Displayable {
 
     public void setRegistrationDate(LocalDate registrationDate) {
         while (registrationDate.isBefore(getDateOfBirth()) || registrationDate.isAfter(LocalDate.now())) {
-            System.out.println("Registration date cannot be before date of birth.");
+            System.out.println("Registration date cannot be before date of birth OR in the future.");
             registrationDate = InputHandler.getDateInput("Enter Registration Date: ");
         }
         this.registrationDate = registrationDate;

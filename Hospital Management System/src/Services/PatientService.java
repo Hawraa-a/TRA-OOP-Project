@@ -92,7 +92,16 @@ public class PatientService implements Manageable<Patient>, Searchable {
         inPatient.setDischargeDate(InputHandler.getDateInput("Enter the Discharge Date: "));
         inPatient.setRoomNumber(InputHandler.getStringInput("Enter the Room Number: "));
         inPatient.setBedNumber(InputHandler.getStringInput("Enter the Bed Number: "));
-        inPatient.setAdmittingDoctorId(InputHandler.getStringInput("Enter the Admitting Doctor ID: "));
+        String AdmittingDoctorId;
+        while (true) {
+            AdmittingDoctorId = (InputHandler.getStringInput("Enter the Admitting Doctor Id: "));
+            if (DoctorService.checkById(AdmittingDoctorId)) {
+                inPatient.setAdmittingDoctorId(AdmittingDoctorId);
+                break;
+            } else {
+                System.out.println("Doctor not found. Please enter a valid Doctor ID.");
+            }
+        }
         inPatient.setDailyCharges(InputHandler.getDoubleInput("Enter the Daily Charges: "));
 
         return inPatient;
@@ -133,8 +142,16 @@ public class PatientService implements Manageable<Patient>, Searchable {
 
         outPatient.setVisitCount(InputHandler.getIntInput("Enter the Visit Count: "));
         outPatient.setLastVisitDate(InputHandler.getDateInput("Enter the Last Visit Date: "));
-        outPatient.setPreferredDoctorId(InputHandler.getStringInput("Enter the Preferred Doctor Id: "));
-
+        String PreferredDoctorId;
+        while (true) {
+            PreferredDoctorId = (InputHandler.getStringInput("Enter the Preferred Doctor Id: "));
+            if (DoctorService.checkById(PreferredDoctorId)) {
+                outPatient.setPreferredDoctorId(PreferredDoctorId);
+                break;
+            } else {
+                System.out.println("Doctor not found. Please enter a valid Doctor ID.");
+            }
+        }
         return outPatient;
     }
 
@@ -169,11 +186,21 @@ public class PatientService implements Manageable<Patient>, Searchable {
         emergencyPatient.setEmergencyContact(InputHandler.getStringInput("Enter the Emergency Contact: "));
         emergencyPatient.setRegistrationDate(InputHandler.getDateInput("Enter the Registration Date: "));
         emergencyPatient.setInsuranceId(InputHandler.getStringInput("Enter the Insurance ID: "));
+
         emergencyPatient.setAdmissionDate(InputHandler.getDateInput("Enter the Admission Date: "));
         emergencyPatient.setDischargeDate(InputHandler.getDateInput("Enter the Discharge Date: "));
         emergencyPatient.setRoomNumber(InputHandler.getStringInput("Enter the Room Number: "));
         emergencyPatient.setBedNumber(InputHandler.getStringInput("Enter the Bed Number: "));
-        emergencyPatient.setAdmittingDoctorId(InputHandler.getStringInput("Enter the Admitting Doctor ID: "));
+        String AdmittingDoctorId;
+        while (true) {
+            AdmittingDoctorId = (InputHandler.getStringInput("Enter the Admitting Doctor Id: "));
+            if (DoctorService.checkById(AdmittingDoctorId)) {
+                emergencyPatient.setAdmittingDoctorId(AdmittingDoctorId);
+                break;
+            } else {
+                System.out.println("Doctor not found. Please enter a valid Doctor ID.");
+            }
+        }
         emergencyPatient.setDailyCharges(InputHandler.getDoubleInput("Enter the Daily Charges: "));
 
         emergencyPatient.setEmergencyType(InputHandler.getStringInput("Enter the Emergency Type: "));

@@ -14,11 +14,7 @@ public class ReportsService {
         System.out.println("Daily Appointments Report");
         List<Appointment> appointments = appointmentService.getAll();
         for (Appointment app : appointments) {
-            System.out.println("Appointment Id: " + app.getAppointmentId() +
-                    " | Patient Id: " + app.getPatientId() +
-                    " | Doctor Id: " + app.getDoctorId() +
-                    " | Date: " + app.getAppointmentDate() +
-                    " | Time: " + app.getAppointmentTime());
+            System.out.println("Appointment Id: " + app.getAppointmentId() + " | Patient Id: " + app.getPatientId() + " | Doctor Id: " + app.getDoctorId() + " | Date: " + app.getAppointmentDate() + " | Time: " + app.getAppointmentTime());
         }
     }
 
@@ -33,12 +29,12 @@ public class ReportsService {
     public void departmentOccupancyReport() {
         System.out.println("Department Occupancy Report");
         List<Department> departments = departmentService.getAlldepartmentList();
-        if (departments.isEmpty()){
+        if (departments.isEmpty()) {
             System.out.println("No departments available to show.");
             return;
         }
         for (Department dep : departments) {
-            System.out.println("Department Name: " + dep.getDepartmentName() + "\n Head Doctor Id: "+ dep.getHeadDoctorId() + "\n Bed Capacity: " + dep.getBedCapacity() + "\n Available Capacity: " +dep.getAvailableBeds());
+            System.out.println("Department Name: " + dep.getDepartmentName() + "\n Head Doctor Id: " + dep.getHeadDoctorId() + "\n Bed Capacity: " + dep.getBedCapacity() + "\n Available Capacity: " + dep.getAvailableBeds());
         }
     }
 
@@ -65,8 +61,6 @@ public class ReportsService {
         System.out.println("Emergency Cases Report");
         List<Patient> patients = patientService.getAllPatientsList();
 
-        patients.stream()
-                .filter(patient -> patient instanceof EmergencyPatient)
-                .forEach(Patient::displayInfo);
+        patients.stream().filter(patient -> patient instanceof EmergencyPatient).forEach(Patient::displayInfo);
     }
 }

@@ -247,8 +247,7 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
         LocalDate today = LocalDate.now();
         boolean found = false;
         for (Appointment a : appointmentList) {
-            if (a.getAppointmentDate().isAfter(today)
-                    && !"Cancelled".equalsIgnoreCase(a.getStatus())) {
+            if (a.getAppointmentDate().isAfter(today) && !"Cancelled".equalsIgnoreCase(a.getStatus())) {
                 a.displaySummary();
                 System.out.println("------------------------------------");
                 found = true;
@@ -284,17 +283,16 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
         return appointment;
     }
 
-    public Appointment createAppointment(Appointment appointment) {
+    public static void createAppointment(Appointment appointment) {
         if (appointment == null) {
             System.out.println("Invalid appointment object.");
-            return null;
+            return;
         }
         if (appointment.getAppointmentId() == null) {
             appointment.setAppointmentId(HelperUtils.generateId("AP"));
         }
         appointmentList.add(appointment);
-        System.out.println("Appointment created successfully (using object).");
-        return appointment;
+        System.out.println("Appointment created successfully.");
     }
 
     public void rescheduleAppointment(String appointmentId, LocalDate newDate) {
@@ -349,9 +347,7 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
         boolean found = false;
         System.out.println("=== Appointments for Doctor " + doctorId + " between " + startDate + " and " + endDate + " ===");
         for (Appointment a : appointmentList) {
-            if (a.getDoctorId().equalsIgnoreCase(doctorId)
-                    && (a.getAppointmentDate().isEqual(startDate) || a.getAppointmentDate().isAfter(startDate))
-                    && (a.getAppointmentDate().isEqual(endDate) || a.getAppointmentDate().isBefore(endDate))) {
+            if (a.getDoctorId().equalsIgnoreCase(doctorId) && (a.getAppointmentDate().isEqual(startDate) || a.getAppointmentDate().isAfter(startDate)) && (a.getAppointmentDate().isEqual(endDate) || a.getAppointmentDate().isBefore(endDate))) {
                 a.displayInfo();
                 System.out.println("------------------------------------");
                 found = true;

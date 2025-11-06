@@ -98,6 +98,13 @@ public class InPatient extends Patient implements Displayable, Billable {
     }
 
     public double calculateStayDuration() {
+        if (admissionDate == null) {
+            System.out.println("Admission date is missing for patient " + getPatientId());
+            return 0;
+        }
+        if (dischargeDate == null) {
+            dischargeDate = LocalDate.now();
+        }
         return ChronoUnit.DAYS.between(admissionDate, dischargeDate);
     }
 

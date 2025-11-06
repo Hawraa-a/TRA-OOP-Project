@@ -277,6 +277,7 @@ public class NurseService implements Manageable<Nurse>, Searchable {
             nurseToAssign.assignPatient(patientToAssign);
         }
     }
+
     public static Boolean checkById(String id) {
         for (Nurse nurse : nursesList) {
             if (nurse.getNurseId().equalsIgnoreCase(id)) {
