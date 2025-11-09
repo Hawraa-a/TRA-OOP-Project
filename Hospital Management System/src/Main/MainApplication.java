@@ -9,7 +9,7 @@ public class MainApplication {
     public static Integer mainMenuOption = 0;
 
     public static void main(String[] args) {
-        SampleData.initializeAllData();
+
         while (mainMenuOption != 8) {
             showMainMenu();
             System.out.println("Enter Your Choice:");

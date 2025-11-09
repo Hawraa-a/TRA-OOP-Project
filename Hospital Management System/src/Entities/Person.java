@@ -44,7 +44,7 @@ public class Person implements Displayable {
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        while (!dateOfBirth.isBefore(LocalDate.now())) {
+        while (dateOfBirth.isAfter(LocalDate.now())) {
             dateOfBirth = InputHandler.getDateInput("Invalid date of birth. Please enter a valid past date");
         }
         this.dateOfBirth = dateOfBirth;

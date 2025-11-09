@@ -73,7 +73,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         String patientId = HelperUtils.generateId("INP");
         System.out.println("Generated Patient ID: " + patientId);
         inPatient.setPatientId(patientId);
-        inPatient.setBloodGroup(InputHandler.getStringInput("Enter the Blood Group:"));
+        inPatient.setBloodGroup(InputHandler.getStringInput("Enter the Blood Group: "));
         List<String> allergies = new ArrayList<>();
         System.out.println("Enter The Allergies(type 'q' to finish):");
         while (true) {
@@ -85,7 +85,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         }
         inPatient.setAllergies(allergies);
         inPatient.setEmergencyContact(InputHandler.getStringInput("Enter the Emergency Contact: "));
-        inPatient.setRegistrationDate(InputHandler.getDateInput("Enter the Registration Date: "));
+        inPatient.setRegistrationDate(InputHandler.getDateInput("Enter the Registration Date"));
         inPatient.setInsuranceId(InputHandler.getStringInput("Enter the Insurance ID: "));
 
         inPatient.setAdmissionDate(InputHandler.getDateInput("Enter the Admission Date: "));
@@ -125,7 +125,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         String patientId = HelperUtils.generateId("OutP");
         System.out.println("Generated Patient ID: " + patientId);
         outPatient.setPatientId(patientId);
-        outPatient.setBloodGroup(InputHandler.getStringInput("Enter the Blood Group:"));
+        outPatient.setBloodGroup(InputHandler.getStringInput("Enter the Blood Group: "));
         List<String> allergies = new ArrayList<>();
         System.out.println("Enter The Allergies(type 'q' to finish):");
         while (true) {
@@ -137,7 +137,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         }
         outPatient.setAllergies(allergies);
         outPatient.setEmergencyContact(InputHandler.getStringInput("Enter the Emergency Contact: "));
-        outPatient.setRegistrationDate(InputHandler.getDateInput("Enter the Registration Date: "));
+        outPatient.setRegistrationDate(InputHandler.getDateInput("Enter the Registration Date"));
         outPatient.setInsuranceId(InputHandler.getStringInput("Enter the Insurance ID: "));
 
         outPatient.setVisitCount(InputHandler.getIntInput("Enter the Visit Count: "));
@@ -172,7 +172,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         String patientId = HelperUtils.generateId("EMP");
         System.out.println("Generated Patient ID: " + patientId);
         emergencyPatient.setPatientId(patientId);
-        emergencyPatient.setBloodGroup(InputHandler.getStringInput("Enter the Blood Group:"));
+        emergencyPatient.setBloodGroup(InputHandler.getStringInput("Enter the Blood Group: "));
         List<String> allergies = new ArrayList<>();
         System.out.println("Enter The Allergies(type 'q' to finish):");
         while (true) {
@@ -184,7 +184,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         }
         emergencyPatient.setAllergies(allergies);
         emergencyPatient.setEmergencyContact(InputHandler.getStringInput("Enter the Emergency Contact: "));
-        emergencyPatient.setRegistrationDate(InputHandler.getDateInput("Enter the Registration Date: "));
+        emergencyPatient.setRegistrationDate(InputHandler.getDateInput("Enter the Registration Date"));
         emergencyPatient.setInsuranceId(InputHandler.getStringInput("Enter the Insurance ID: "));
 
         emergencyPatient.setAdmissionDate(InputHandler.getDateInput("Enter the Admission Date: "));
