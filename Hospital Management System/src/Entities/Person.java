@@ -31,6 +31,7 @@ public class Person implements Displayable {
     public Person() {
 
     }
+
     public String getAddress() {
         return address;
     }
@@ -55,7 +56,7 @@ public class Person implements Displayable {
     }
 
     public void setEmail(String email) {
-        String regex = "^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$";
+        String regex = "^[\\w._+-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$";
         while (HelperUtils.isNull(email) || !email.matches(regex)) {
             System.out.println("Invalid email format. Please enter a valid email (example@mail.com).");
             email = InputHandler.getStringInput("Enter Email: ");
@@ -126,6 +127,7 @@ public class Person implements Displayable {
     public void displaySummary() {
         System.out.println("Id: " + id);
         System.out.println("Name: " + firstName + " " + lastName);
+        System.out.println("Address: " + address);
     }
 
     @Override

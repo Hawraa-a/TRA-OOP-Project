@@ -98,6 +98,7 @@ public class Department implements Displayable {
         System.out.println("Nurses: " + nurses);
         System.out.println("Bed Capacity: " + bedCapacity);
         System.out.println("Available Beds: " + availableBeds);
+        System.out.println();
     }
 
     @Override

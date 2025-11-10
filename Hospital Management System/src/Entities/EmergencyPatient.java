@@ -66,5 +66,6 @@ public class EmergencyPatient extends InPatient implements Displayable {
         System.out.println("Arrival Mode: " + arrivalMode);
         System.out.println("Triage Level: " + triageLevel);
         System.out.println("Admitted ViaER: " + admittedViaER);
+        System.out.println();
     }
 }

@@ -57,6 +57,7 @@ public class Surgeon extends Doctor implements Displayable {
         System.out.println("Surgeries Performed: " + surgeriesPerformed);
         System.out.println("Surgery Types: " + String.join(", ", surgeryTypes));
         System.out.println("Operation Theatre Access: " + operationTheatreAccess);
+        System.out.println();
     }
 
     public void performSurgery(String surgeryType){

@@ -60,7 +60,6 @@ public class GeneralPractitioner extends Doctor implements Displayable {
         System.out.println("Walkin available: " + walkinAvailable);
         System.out.println("Home visit available: " + homeVisitAvailable);
         System.out.println("Vaccination certified: " + vaccinationCertified);
-        System.out.println("---------------------------------------------");
     }
 
     public void administerVaccine(Patient patient) {

@@ -114,6 +114,7 @@ public class Appointment implements Displayable {
         System.out.println("Status: " + status);
         System.out.println("Reason: " + reason);
         System.out.println("Notes: " + notes);
+        System.out.println();
     }
 
     @Override

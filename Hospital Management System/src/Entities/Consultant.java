@@ -65,6 +65,5 @@ public class Consultant extends Doctor implements Displayable {
         System.out.println("Consultation Types: " + consultationTypes);
         System.out.println("Online Consultation Available: " + onlineConsultationAvailable);
         System.out.println("Consultations Duration " + consultationDuration);
-        System.out.println("---------------------------------------------");
     }
 }

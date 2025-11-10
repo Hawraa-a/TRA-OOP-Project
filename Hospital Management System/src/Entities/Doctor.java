@@ -111,7 +111,17 @@ public class Doctor extends Person implements Displayable {
         System.out.println("Department Id: " + departmentId);
         System.out.println("Consultation Fee: " + consultationFee);
         System.out.println("availableSlots: " + availableSlots);
-        System.out.println("assignedPatients: " + assignedPatients);
+        if (assignedPatients != null && !assignedPatients.isEmpty()) {
+            System.out.print("assignedPatients: [");
+            for (int i = 0; i < assignedPatients.size(); i++) {
+                Patient p = assignedPatients.get(i);
+                System.out.print(p.getPatientId() + " - " + p.getFirstName() + " " + p.getLastName());
+                if (i < assignedPatients.size() - 1) System.out.print(", ");
+            }
+            System.out.println("]");
+        } else {
+            System.out.println("assignedPatients: []");
+        }
     }
 
     @Override

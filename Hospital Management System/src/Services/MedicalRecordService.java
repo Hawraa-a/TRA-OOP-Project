@@ -271,4 +271,34 @@ public class MedicalRecordService implements Manageable<MedicalRecord>, Searchab
         }
         return false;
     }
+
+    public static void addSampleMedicalRecords() {
+        if (PatientService.patientList.isEmpty() || DoctorService.doctorList.isEmpty()) {
+            System.out.println("Please make sure sample Patients and Doctors are added before generating Medical Records.");
+            return;
+        }
+
+        for (int i = 0; i < 12; i++) {
+            MedicalRecord record = new MedicalRecord();
+            record.setRecordId(HelperUtils.generateId("MR"));
+            record.setPatientId(PatientService.patientList.get(i % PatientService.patientList.size()).getPatientId());
+            record.setDoctorId(DoctorService.doctorList.get(i % DoctorService.doctorList.size()).getDoctorId());
+
+            record.setVisitDate(LocalDate.now().minusDays(i % 5)); // last few days
+            record.setDiagnosis("Diagnosis " + (i + 1));
+            record.setPrescription("Prescription " + (i + 1));
+            record.setTestResults("Blood Test: Normal, X-Ray: Clear " + (i + 1));
+            record.setNotes("Follow-up visit scheduled.");
+
+            recordList.add(record);
+
+            Patient patient = PatientService.patientList.get(i % PatientService.patientList.size());
+            if (patient.getMedicalRecords() == null) {
+                patient.setMedicalRecords(new ArrayList<>());
+            }
+            patient.getMedicalRecords().add(record);
+        }
+        System.out.println("=== Sample Medical Records Added Successfully ===");
+    }
+
 }

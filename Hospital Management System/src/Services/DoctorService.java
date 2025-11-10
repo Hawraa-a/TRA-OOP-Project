@@ -7,6 +7,7 @@ import Utils.HelperUtils;
 import Utils.InputHandler;
 
 import javax.swing.text.html.parser.Entity;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -584,5 +585,78 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
             }
         }
         return false;
+    }
+
+    public static void addSampleDoctors() {
+
+        for (int i = 0; i < 3; i++) {
+            Surgeon surgeon = new Surgeon();
+            surgeon.setId(HelperUtils.generateId("PER"));
+            surgeon.setDoctorId(HelperUtils.generateId("SUR"));
+            surgeon.setFirstName("Surgeon" + i);
+            surgeon.setLastName("Al Harthy");
+            surgeon.setGender(i % 2 == 0 ? "Male" : "Female");
+            surgeon.setDateOfBirth(LocalDate.of(1980 + i, (i % 12) + 1, (i % 27) + 1));
+            surgeon.setPhoneNumber("9800000" + i);
+            surgeon.setEmail("sur" + i + "@hospital.com");
+            surgeon.setAddress("Muscat, Oman - Block " + i);
+            surgeon.setSpecialization(i % 2 == 0 ? "Cardiac Surgery" : "Neurosurgery");
+            surgeon.setQualification("MD, PhD");
+            surgeon.setExperienceYears(10 + i);
+            surgeon.setConsultationFee(50.0 + (i * 10));
+            surgeon.setAvailableSlots(List.of("Monday 10AM", "Wednesday 3PM"));
+            surgeon.setOperationTheatreAccess(true);
+            surgeon.setSurgeriesPerformed(100 + (i * 20));
+            surgeon.setSurgeryTypes(List.of("Appendectomy", "Bypass Surgery"));
+            surgeon.setAssignedPatients(new ArrayList<>());
+            doctorList.add(surgeon);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            Consultant consultant = new Consultant();
+            consultant.setId(HelperUtils.generateId("PER"));
+            consultant.setDoctorId(HelperUtils.generateId("CON"));
+            consultant.setFirstName("Consultant" + i);
+            consultant.setLastName("Al Habsi");
+            consultant.setGender(i % 2 == 0 ? "Female" : "Male");
+            consultant.setDateOfBirth(LocalDate.of(1982 + i, (i % 12) + 1, (i % 27) + 1));
+            consultant.setPhoneNumber("9700000" + i);
+            consultant.setEmail("con" + i + "@hospital.com");
+            consultant.setAddress("Sohar, Oman - Building " + i);
+            consultant.setSpecialization(i % 2 == 0 ? "Dermatology" : "Pediatrics");
+            consultant.setQualification("MBBS, MSc");
+            consultant.setExperienceYears(8 + i);
+            consultant.setConsultationFee(35.0 + (i * 5));
+            consultant.setAvailableSlots(List.of("Tuesday 2PM", "Thursday 9AM"));
+            consultant.setConsultationTypes(List.of("In-person", "Online"));
+            consultant.setOnlineConsultationAvailable(i % 2 == 0);
+            consultant.setConsultationDuration(30 + (i * 10));
+            consultant.setAssignedPatients(new ArrayList<>());
+            doctorList.add(consultant);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            GeneralPractitioner gp = new GeneralPractitioner();
+            gp.setId(HelperUtils.generateId("PER"));
+            gp.setDoctorId(HelperUtils.generateId("GP"));
+            gp.setFirstName("GP" + i);
+            gp.setLastName("Al Busaidi");
+            gp.setGender(i % 2 == 0 ? "Male" : "Female");
+            gp.setDateOfBirth(LocalDate.of(1985 + i, (i % 12) + 1, (i % 27) + 1));
+            gp.setPhoneNumber("9600000" + i);
+            gp.setEmail("gp" + i + "@hospital.com");
+            gp.setAddress("Nizwa, Oman - Street " + i);
+            gp.setSpecialization("General Medicine");
+            gp.setQualification("MBBS");
+            gp.setExperienceYears(5 + i);
+            gp.setConsultationFee(20.0 + (i * 5));
+            gp.setAvailableSlots(List.of("Sunday 9AM", "Tuesday 1PM"));
+            gp.setWalkinAvailable(true);
+            gp.setHomeVisitAvailable(i % 2 == 0);
+            gp.setVaccinationCertified(true);
+            gp.setAssignedPatients(new ArrayList<>());
+            doctorList.add(gp);
+        }
+        System.out.println("=== Sample Doctors Added Successfully ===");
     }
 }

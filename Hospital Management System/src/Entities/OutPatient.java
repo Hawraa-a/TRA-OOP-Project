@@ -56,6 +56,7 @@ public class OutPatient extends Patient implements Displayable {
         System.out.println("Visit Count: " + visitCount);
         System.out.println("Last Visit Date: " + lastVisitDate);
         System.out.println("Preferred Doctor ID: " + preferredDoctorId);
+        System.out.println();
     }
 
     public void scheduleFollowUp(LocalDate visitDate) {

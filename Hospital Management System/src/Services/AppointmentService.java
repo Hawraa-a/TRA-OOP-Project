@@ -366,4 +366,31 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
         }
         return false;
     }
+
+    public static void sampleDataAppointment() {
+        if (PatientService.patientList.isEmpty() || DoctorService.doctorList.isEmpty()) {
+            System.out.println("Please make sure sample Patients and Doctors are added before generating Appointments.");
+            return;
+        }
+        for (int i = 0; i < 15; i++) {
+            Appointment appointment = new Appointment();
+            appointment.setAppointmentId(HelperUtils.generateId("AP"));
+            Patient patient = PatientService.patientList.get(i % PatientService.patientList.size());
+            appointment.setPatientId(patient.getPatientId());
+            appointment.setDoctorId(DoctorService.doctorList.get(i % DoctorService.doctorList.size()).getDoctorId());
+            LocalDate date = LocalDate.now().plusDays(i % 10);
+            appointment.setAppointmentDate(date);
+            appointment.setAppointmentTime((8 + (i % 8)) + ":00 AM");
+            appointment.setReason("General Checkup " + (i + 1));
+            appointment.setNotes("Routine visit or consultation.");
+            appointment.setStatus("Scheduled");
+            appointmentList.add(appointment);
+
+            if (patient.getAppointments() == null) {
+                patient.setAppointments(new ArrayList<>());
+            }
+            patient.getAppointments().add(appointment);
+        }
+        System.out.println("=== Sample Appointments Added Successfully ===");
+    }
 }

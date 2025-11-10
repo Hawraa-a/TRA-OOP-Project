@@ -77,8 +77,18 @@ public class Nurse extends Person implements Displayable {
         System.out.println("departmentId: " + departmentId);
         System.out.println("shift: " + shift);
         System.out.println("qualification: " + qualification);
-        System.out.println("assignedPatients: " + assignedPatients);
-        System.out.println("---------------------------------------------");
+        if (assignedPatients != null && !assignedPatients.isEmpty()) {
+            System.out.print("assignedPatients: [");
+            for (int i = 0; i < assignedPatients.size(); i++) {
+                Patient p = assignedPatients.get(i);
+                System.out.print(p.getPatientId() + " - " + p.getFirstName() + " " + p.getLastName());
+                if (i < assignedPatients.size() - 1) System.out.print(", ");
+            }
+            System.out.println("]");
+        } else {
+            System.out.println("assignedPatients: []");
+        }
+        System.out.println();
     }
 
     public void assignPatient(Patient patient) {

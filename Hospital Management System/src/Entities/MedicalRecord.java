@@ -107,6 +107,7 @@ public class MedicalRecord implements Displayable {
         System.out.println("Prescription: " + prescription);
         System.out.println("Test Results: " + testResults);
         System.out.println("Notes: " + notes);
+        System.out.println();
     }
     @Override
     public void displaySummary() {

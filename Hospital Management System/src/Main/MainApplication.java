@@ -1,5 +1,6 @@
 package Main;
 
+import Entities.*;
 import Services.*;
 
 import java.util.Scanner;
@@ -9,7 +10,7 @@ public class MainApplication {
     public static Integer mainMenuOption = 0;
 
     public static void main(String[] args) {
-
+        addSampleDataForAll();
         while (mainMenuOption != 8) {
             showMainMenu();
             System.out.println("Enter Your Choice:");
@@ -443,5 +444,50 @@ public class MainApplication {
                 default -> System.out.println("Please enter a number from the menu");
             }
         }
+    }
+
+    public static void addSampleDataForAll() {
+        PatientService.addSamplePatients();
+        DoctorService.addSampleDoctors();
+        NurseService.sampleDataNurse();
+        DepartmentService.addSampleDepartments();
+        AppointmentService.sampleDataAppointment();
+        MedicalRecordService.addSampleMedicalRecords();
+        linkSampleData();
+    }
+
+    public static void linkSampleData() {
+        // Link Doctors to Departments
+        for (int i = 0; i < DoctorService.doctorList.size(); i++) {
+            Doctor doctor = DoctorService.doctorList.get(i);
+            Department dept = DepartmentService.departmentList.get(i % DepartmentService.departmentList.size());
+            doctor.setDepartmentId(dept.getDepartmentId());
+            dept.getDoctors().add(doctor);
+        }
+        // Link Nurses to Departments
+        for (int i = 0; i < NurseService.nursesList.size(); i++) {
+            Nurse nurse = NurseService.nursesList.get(i);
+            Department dept = DepartmentService.departmentList.get(i % DepartmentService.departmentList.size());
+            nurse.setDepartmentId(dept.getDepartmentId());
+            dept.getNurses().add(nurse);
+        }
+        // Assign Patients to Doctors and Nurses
+        for (int i = 0; i < PatientService.patientList.size(); i++) {
+            Patient patient = PatientService.patientList.get(i);
+            Doctor doctor = DoctorService.doctorList.get(i % DoctorService.doctorList.size());
+            doctor.getAssignedPatients().add(patient);
+
+            Nurse nurse = NurseService.nursesList.get(i % NurseService.nursesList.size());
+            nurse.getAssignedPatients().add(patient);
+
+            if (patient instanceof InPatient inPatient) {
+                inPatient.setAdmittingDoctorId(doctor.getDoctorId());
+            } else if (patient instanceof EmergencyPatient emergencyPatient) {
+                emergencyPatient.setAdmittingDoctorId(doctor.getDoctorId());
+            } else if (patient instanceof OutPatient outPatient) {
+                outPatient.setPreferredDoctorId(doctor.getDoctorId());
+            }
+        }
+        System.out.println("Data linking completed successfully.");
     }
 }

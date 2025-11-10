@@ -258,4 +258,25 @@ public class DepartmentService implements Manageable<Department>, Searchable {
         }
         return false;
     }
+    public static void addSampleDepartments() {
+        String[] departmentNames = {"Cardiology", "Neurology", "Pediatrics"};
+        int[] bedCapacities = {30, 25, 20};
+
+        for (int i = 0; i < departmentNames.length; i++) {
+            Department department = new Department();
+
+            department.setDepartmentId(HelperUtils.generateId("DEP"));
+            department.setDepartmentName(departmentNames[i]);
+            department.setBedCapacity(bedCapacities[i]);
+            department.setAvailableBeds(bedCapacities[i]);
+
+            if (!DoctorService.doctorList.isEmpty()) {
+                department.setHeadDoctorId(DoctorService.doctorList.get(i % DoctorService.doctorList.size()).getDoctorId());
+            } else {
+                department.setHeadDoctorId("HEAD" + (i + 1));
+            }
+            departmentList.add(department);
+        }
+        System.out.println("=== Sample Departments Added Successfully ===");
+    }
 }

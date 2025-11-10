@@ -286,4 +286,25 @@ public class NurseService implements Manageable<Nurse>, Searchable {
         }
         return false;
     }
+
+    public static void sampleDataNurse(){
+        for (int i = 0; i < 5; i++) {
+            Nurse nurse = new Nurse();
+
+            nurse.setId(HelperUtils.generateId("PER"));
+            nurse.setNurseId(HelperUtils.generateId("NUR"));
+            nurse.setFirstName("Nurse" + i);
+            nurse.setLastName("Al Harthy");
+            nurse.setGender(i % 2 == 0 ? "Female" : "Male");
+            nurse.setDateOfBirth(java.time.LocalDate.of(1990 + i, (i % 12) + 1, (i % 27) + 1));
+            nurse.setPhoneNumber("9500000" + i);
+            nurse.setEmail("nurse" + i + "@hospital.com");
+            nurse.setAddress("Muscat, Oman - Street " + i);
+            nurse.setQualification(i % 2 == 0 ? "Bachelor of Nursing" : "Diploma in Nursing");
+            nurse.setShift(i % 3 == 0 ? "Morning" : (i % 3 == 1 ? "Evening" : "Night"));
+            nurse.setAssignedPatients(new ArrayList<>());
+            nursesList.add(nurse);
+        }
+        System.out.println("=== Sample Nurses Added Successfully ===");
+    }
 }
