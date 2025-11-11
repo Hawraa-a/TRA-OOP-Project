@@ -18,7 +18,7 @@ public class NurseService implements Manageable<Nurse>, Searchable {
         System.out.println("=== Add New Nurse ===");
         Nurse nurse = new Nurse();
 
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         nurse.setId(id);
         nurse.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -127,6 +127,11 @@ public class NurseService implements Manageable<Nurse>, Searchable {
     }
 
     public void editNurse() {
+        if (nursesList.isEmpty()) {
+            System.out.println("No Nurse In The List.");
+            return;
+        }
+
         String id = InputHandler.getStringInput("Enter nurse ID to edit: ");
         Nurse nurseToEdit = null;
 

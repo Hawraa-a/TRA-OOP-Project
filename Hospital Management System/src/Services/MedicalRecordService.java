@@ -71,6 +71,11 @@ public class MedicalRecordService implements Manageable<MedicalRecord>, Searchab
     }
 
     public void editMedicalRecord() {
+        if (recordList.isEmpty()) {
+            System.out.println("No medical records in the list.");
+            return;
+        }
+
         String id = InputHandler.getStringInput("Enter Medical Record ID to edit: ");
         MedicalRecord recordToEdit = null;
 

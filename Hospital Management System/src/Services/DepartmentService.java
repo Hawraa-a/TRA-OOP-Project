@@ -123,6 +123,11 @@ public class DepartmentService implements Manageable<Department>, Searchable {
     }
 
     public void editDepartment() {
+        if (departmentList.isEmpty()) {
+            System.out.println("No departments available.");
+            return;
+        }
+
         String id = InputHandler.getStringInput("Enter Department ID to edit: ");
         while (!checkById(id)) {
             id = InputHandler.getStringInput("Invalid ID. Enter a valid Department ID: ");

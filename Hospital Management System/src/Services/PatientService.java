@@ -18,7 +18,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         System.out.println("=== Registering New Patient ===");
         Patient patient = new Patient();
 
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         patient.setId(id);
         patient.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -59,7 +59,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         System.out.println("=== Add New In Patient ===");
         InPatient inPatient = new InPatient();
 
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         inPatient.setId(id);
         inPatient.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -111,7 +111,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
         System.out.println("=== Add New Out Patient ===");
         OutPatient outPatient = new OutPatient();
 
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         outPatient.setId(id);
         outPatient.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -158,7 +158,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
     public EmergencyPatient addEmergencyPatient() {
         System.out.println("=== Add New Emergency Patient ===");
         EmergencyPatient emergencyPatient = new EmergencyPatient();
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         emergencyPatient.setId(id);
         emergencyPatient.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -223,7 +223,6 @@ public class PatientService implements Manageable<Patient>, Searchable {
         return id;
     }
 
-
     @Override
     public void remove(String id) {
         if (id == null) {
@@ -256,7 +255,7 @@ public class PatientService implements Manageable<Patient>, Searchable {
             System.out.println("There are no Patient Available");
             return;
         }
-        String name = InputHandler.getStringInput("Enter Patient First Name to search: ");
+        String name = InputHandler.getStringInput("Enter Patient's First Name to search: ");
         boolean found = false;
         for (Patient p : patientList) {
             if (p.getFirstName().equalsIgnoreCase(name)) {
@@ -290,6 +289,11 @@ public class PatientService implements Manageable<Patient>, Searchable {
     }
 
     public void editPatient() {
+        if (patientList.isEmpty()) {
+            System.out.println("No Patient In The List.");
+            return;
+        }
+
         String id = InputHandler.getStringInput("Enter patient ID to edit: ");
         Patient patientToEdit = null;
         for (Patient p : patientList) {
@@ -303,7 +307,6 @@ public class PatientService implements Manageable<Patient>, Searchable {
             return;
         }
         boolean editing = true;
-
         while (editing) {
             System.out.println("\nEditing Patient: " + patientToEdit.getFirstName() + " " + patientToEdit.getLastName());
             System.out.println("Select the field to edit:");

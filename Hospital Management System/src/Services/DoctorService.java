@@ -19,7 +19,7 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
         System.out.println("=== Add New Doctor ===");
         Doctor doctor = new Doctor();
 
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         doctor.setId(id);
         doctor.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -110,7 +110,7 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
         System.out.println("=== Add New Consultant ===");
         Consultant consultant = new Consultant();
 
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         consultant.setId(id);
         consultant.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -158,7 +158,7 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
         System.out.println("=== Add New General Practitioner ===");
         GeneralPractitioner generalPractitioner = new GeneralPractitioner();
 
-        String id = Utils.HelperUtils.generateId("PER");
+        String id = HelperUtils.generateId("PER");
         System.out.println("Generated person id: " + id);
         generalPractitioner.setId(id);
         generalPractitioner.setFirstName(InputHandler.getStringInput("Enter the First Name: "));
@@ -197,6 +197,11 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
     }
 
     public void editDoctor() {
+        if (doctorList.isEmpty()) {
+            System.out.println("No Doctor In The List.");
+            return;
+        }
+
         String id = InputHandler.getStringInput("Enter Doctor ID to edit: ");
         Doctor doctorToEdit = null;
         for (Doctor doctor : doctorList) {
@@ -588,7 +593,6 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
     }
 
     public static void addSampleDoctors() {
-
         for (int i = 0; i < 3; i++) {
             Surgeon surgeon = new Surgeon();
             surgeon.setId(HelperUtils.generateId("PER"));
