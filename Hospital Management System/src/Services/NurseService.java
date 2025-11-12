@@ -92,16 +92,13 @@ public class NurseService implements Manageable<Nurse>, Searchable {
             return;
         }
         String nursesName = InputHandler.getStringInput("Enter Nurse First Name to search");
-        boolean found = false;
         for (Nurse n : nursesList) {
             if (n.getFirstName().equalsIgnoreCase(nursesName)) {
                 n.displayInfo();
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No Nurse found with this name");
-        }
+        System.out.println("No Nurse found with this name");
     }
 
     @Override
@@ -111,19 +108,13 @@ public class NurseService implements Manageable<Nurse>, Searchable {
             return;
         }
         String id = InputHandler.getStringInput("Enter Nurse ID to search: ");
-        boolean found = false;
-
         for (Nurse nurse : nursesList) {
             if (nurse.getNurseId().equalsIgnoreCase(id)) {
                 nurse.displayInfo();
-                found = true;
-                break;
+                return;
             }
         }
-
-        if (!found) {
-            System.out.println("No nurse found with ID: " + id);
-        }
+        System.out.println("No nurse found with ID: " + id);
     }
 
     public void editNurse() {
@@ -292,7 +283,7 @@ public class NurseService implements Manageable<Nurse>, Searchable {
         return false;
     }
 
-    public static void sampleDataNurse(){
+    public static void sampleDataNurse() {
         for (int i = 0; i < 5; i++) {
             Nurse nurse = new Nurse();
 

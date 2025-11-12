@@ -89,17 +89,14 @@ public class DepartmentService implements Manageable<Department>, Searchable {
             return;
         }
         String name = InputHandler.getStringInput("Enter Department Name to search: ");
-        boolean found = false;
         for (Department dep : departmentList) {
             if (dep.getDepartmentName().equalsIgnoreCase(name)) {
                 dep.displayInfo();
                 System.out.println("------------------------------------");
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No department found with this name");
-        }
+        System.out.println("No department found with this name");
     }
 
     @Override
@@ -109,17 +106,13 @@ public class DepartmentService implements Manageable<Department>, Searchable {
             return;
         }
         String id = InputHandler.getStringInput("Enter Department ID to search: ");
-        boolean found = false;
         for (Department dep : departmentList) {
             if (dep.getDepartmentId().equalsIgnoreCase(id)) {
                 dep.displayInfo();
-                found = true;
-                break;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No department found with this ID");
-        }
+        System.out.println("No department found with this ID");
     }
 
     public void editDepartment() {
@@ -263,6 +256,7 @@ public class DepartmentService implements Manageable<Department>, Searchable {
         }
         return false;
     }
+
     public static void addSampleDepartments() {
         String[] departmentNames = {"Cardiology", "Neurology", "Pediatrics"};
         int[] bedCapacities = {30, 25, 20};

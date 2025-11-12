@@ -255,17 +255,15 @@ public class PatientService implements Manageable<Patient>, Searchable {
             System.out.println("There are no Patient Available");
             return;
         }
-        String name = InputHandler.getStringInput("Enter Patient's First Name to search: ");
-        boolean found = false;
+        String firstName = InputHandler.getStringInput("Enter Patient's First Name to search: ");
+        String lastName = InputHandler.getStringInput("Enter Patient's Last Name to search: ");
         for (Patient p : patientList) {
-            if (p.getFirstName().equalsIgnoreCase(name)) {
+            if (p.getFirstName().equalsIgnoreCase(firstName) && p.getLastName().equalsIgnoreCase(lastName)) {
                 p.displayInfo();
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No Patient found with this name");
-        }
+        System.out.println("No Patient found with this name");
     }
 
     @Override
@@ -275,17 +273,13 @@ public class PatientService implements Manageable<Patient>, Searchable {
             return;
         }
         String id = InputHandler.getStringInput("Enter Patient ID to search: ");
-        boolean found = false;
         for (Patient patient : patientList) {
             if (patient.getPatientId().equalsIgnoreCase(id)) {
                 patient.displayInfo();
-                found = true;
-                break;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No patient found with ID: " + id);
-        }
+        System.out.println("No patient found with ID: " + id);
     }
 
     public void editPatient() {

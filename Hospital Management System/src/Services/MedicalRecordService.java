@@ -167,17 +167,15 @@ public class MedicalRecordService implements Manageable<MedicalRecord>, Searchab
             System.out.println("No medical records available.");
             return;
         }
-        String diagnosis = InputHandler.getStringInput("Enter Diagnosis to search: ");
-        boolean found = false;
+        String patientId = InputHandler.getStringInput("Enter patient ID to search: ");
         for (MedicalRecord record : recordList) {
-            if (record.getDiagnosis() != null && record.getDiagnosis().equalsIgnoreCase(diagnosis)) {
+            if (record.getPatientId().equalsIgnoreCase(patientId)) {
+                System.out.println("Medical record found:");
                 record.displayInfo();
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No record found with diagnosis: " + diagnosis);
-        }
+        System.out.println("No medical record found for this patient.");
     }
 
     @Override
@@ -186,63 +184,18 @@ public class MedicalRecordService implements Manageable<MedicalRecord>, Searchab
             System.out.println("No medical records available.");
             return;
         }
-        String id = InputHandler.getStringInput("Enter Record ID to search: ");
-        boolean found = false;
-        for (MedicalRecord record : recordList) {
-            if (record.getRecordId().equalsIgnoreCase(id)) {
-                record.displayInfo();
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            System.out.println("No record found with ID: " + id);
-        }
-    }
 
-    public void getRecordsByPatientId() {
-        if (recordList.isEmpty()) {
-            System.out.println("No medical records available.");
-            return;
-        }
-        String patientId = InputHandler.getStringInput("Enter patient ID to search:");
-        List<MedicalRecord> results = new ArrayList<>();
-        for (MedicalRecord record : recordList) {
-            if (record.getPatientId().equalsIgnoreCase(patientId)) {
-                results.add(record);
-            }
-        }
-        if (results.isEmpty()) {
-            System.out.println("No records found for Patient ID: " + patientId);
-        } else {
-            System.out.println("=== Medical Records for Patient ID: " + patientId + " ===");
-            for (MedicalRecord record : results) {
-                record.displayInfo();
-                System.out.println("------------------------------------");
-            }
-        }
-    }
+        String doctorId = InputHandler.getStringInput("Enter doctor ID to search: ");
 
-    public void getRecordsByDoctorId() {
-        if (recordList.isEmpty()) {
-            System.out.println("No medical records available.");
-            return;
-        }
-        String doctorId = InputHandler.getStringInput("Enter Doctor ID to search: ");
-        List<MedicalRecord> results = new ArrayList<>();
         for (MedicalRecord record : recordList) {
             if (record.getDoctorId().equalsIgnoreCase(doctorId)) {
-                results.add(record);
-            }
-        }
-        if (results.isEmpty()) {
-            System.out.println("No records found for Doctor ID: " + doctorId);
-        } else {
-            System.out.println("=== Medical Records for Doctor ID: " + doctorId + " ===");
-            for (MedicalRecord record : results) {
+                System.out.println("Medical record found:");
                 record.displayInfo();
+                return;
             }
         }
+
+        System.out.println("No medical record found for this doctor.");
     }
 
     public void displayPatientHistory() {
@@ -250,22 +203,15 @@ public class MedicalRecordService implements Manageable<MedicalRecord>, Searchab
             System.out.println("No medical records available.");
             return;
         }
+
         String patientId = InputHandler.getStringInput("Enter Patient ID to display history:");
-        List<MedicalRecord> results = new ArrayList<>();
         for (MedicalRecord record : recordList) {
             if (record.getPatientId().equalsIgnoreCase(patientId)) {
-                results.add(record);
-            }
-        }
-        if (results.isEmpty()) {
-            System.out.println("No history found for Patient ID: " + patientId);
-        } else {
-            System.out.println("=== Patient Medical History ===");
-            for (MedicalRecord record : results) {
                 record.displayInfo();
-                System.out.println("------------------------------------");
+                return;
             }
         }
+        System.out.println("No history found for Patient ID: " + patientId);
     }
 
     public static boolean checkById(String id) {
@@ -289,7 +235,7 @@ public class MedicalRecordService implements Manageable<MedicalRecord>, Searchab
             record.setPatientId(PatientService.patientList.get(i % PatientService.patientList.size()).getPatientId());
             record.setDoctorId(DoctorService.doctorList.get(i % DoctorService.doctorList.size()).getDoctorId());
 
-            record.setVisitDate(LocalDate.now().minusDays(i % 5)); // last few days
+            record.setVisitDate(LocalDate.now().minusDays(i % 5));
             record.setDiagnosis("Diagnosis " + (i + 1));
             record.setPrescription("Prescription " + (i + 1));
             record.setTestResults("Blood Test: Normal, X-Ray: Clear " + (i + 1));
@@ -305,5 +251,4 @@ public class MedicalRecordService implements Manageable<MedicalRecord>, Searchab
         }
         System.out.println("=== Sample Medical Records Added Successfully ===");
     }
-
 }

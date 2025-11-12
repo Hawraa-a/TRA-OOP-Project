@@ -275,10 +275,10 @@ public class MainApplication {
                     appointmentService.getAll();
                 }
                 case 3 -> {
-                    appointmentService.getAppointmentsByPatient();
+                    appointmentService.search();
                 }
                 case 4 -> {
-                    appointmentService.getAppointmentsByDoctor();
+                    appointmentService.searchById();
                 }
                 case 5 -> {
                     appointmentService.getAppointmentsByDate();
@@ -332,10 +332,10 @@ public class MainApplication {
                     medicalRecordService.getAll();
                 }
                 case 3 -> {
-                    medicalRecordService.getRecordsByPatientId();
+                    medicalRecordService.search();
                 }
                 case 4 -> {
-                    medicalRecordService.getRecordsByDoctorId();
+                    medicalRecordService.searchById();
                 }
                 case 5 -> {
                     medicalRecordService.editMedicalRecord();

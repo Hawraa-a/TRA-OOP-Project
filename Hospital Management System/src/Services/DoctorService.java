@@ -332,16 +332,13 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
             return;
         }
         String name = InputHandler.getStringInput("Enter Doctor First Name to search: ");
-        boolean found = false;
         for (Doctor doctor : doctorList) {
             if (doctor.getFirstName().equalsIgnoreCase(name)) {
                 doctor.displayInfo();
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No doctor found with the name: " + name);
-        }
+        System.out.println("No doctor found with the name: " + name);
     }
 
     @Override
@@ -351,17 +348,13 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
             return;
         }
         String id = InputHandler.getStringInput("Enter Doctor ID to search: ");
-        boolean found = false;
         for (Doctor doctor : doctorList) {
             if (doctor.getDoctorId().equalsIgnoreCase(id)) {
                 doctor.displayInfo();
-                found = true;
-                break;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No doctor found with ID: " + id);
-        }
+        System.out.println("No doctor found with ID: " + id);
     }
 
     public void getDoctorsBySpecialization() {
@@ -392,18 +385,15 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
             return;
         }
         String slot = InputHandler.getStringInput("Enter the time slot (e.g., 'Monday 10AM', 'Day time'): ");
-        boolean found = false;
         for (Doctor doctor : doctorList) {
             List<String> slots = doctor.getAvailableSlots();
             if (!slots.isEmpty() && slots.stream().anyMatch(s -> s.equalsIgnoreCase(slot))) {
                 System.out.println("The List of The Available Doctors");
                 doctor.displaySummary();
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No Doctors available at the specified time slot.");
-        }
+        System.out.println("No Doctors available at the specified time slot.");
     }
 
     public void assignPatientToDoctor() {

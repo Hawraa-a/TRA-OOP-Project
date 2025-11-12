@@ -113,7 +113,20 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
 
     @Override
     public void search() {
+        if (appointmentList.isEmpty()) {
+            System.out.println("No appointments available.");
+            return;
+        }
 
+        String patientId = InputHandler.getStringInput("Enter Patient ID: ");
+        for (Appointment a : appointmentList) {
+            if (a.getPatientId().equalsIgnoreCase(patientId)) {
+                a.displayInfo();
+                System.out.println("------------------------------------");
+                return;
+            }
+        }
+        System.out.println("No appointments found for this Patient.");
     }
 
     @Override
@@ -122,18 +135,15 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
             System.out.println("No appointments available.");
             return;
         }
-        String id = InputHandler.getStringInput("Enter Appointment ID to search: ");
-        boolean found = false;
+        String doctorId = InputHandler.getStringInput("Enter Doctor ID: ");
         for (Appointment a : appointmentList) {
-            if (a.getAppointmentId().equalsIgnoreCase(id)) {
+            if (a.getDoctorId().equalsIgnoreCase(doctorId)) {
                 a.displayInfo();
-                found = true;
-                break;
+                System.out.println("------------------------------------");
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No appointment found with ID: " + id);
-        }
+        System.out.println("No appointments found for this Doctor.");
     }
 
     @Override
@@ -167,49 +177,21 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
         System.out.println("Appointment not found with ID: " + appointmentId);
     }
 
-    public void getAppointmentsByPatient() {
-        String patientId = InputHandler.getStringInput("Enter Patient ID: ");
-        boolean found = false;
-        for (Appointment a : appointmentList) {
-            if (a.getPatientId().equalsIgnoreCase(patientId)) {
-                a.displayInfo();
-                System.out.println("------------------------------------");
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("No appointments found for this Patient.");
-        }
-    }
-
-    public void getAppointmentsByDoctor() {
-        String doctorId = InputHandler.getStringInput("Enter Doctor ID: ");
-        boolean found = false;
-        for (Appointment a : appointmentList) {
-            if (a.getDoctorId().equalsIgnoreCase(doctorId)) {
-                a.displayInfo();
-                System.out.println("------------------------------------");
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("No appointments found for this Doctor.");
-        }
-    }
-
     public void getAppointmentsByDate() {
+        if (appointmentList.isEmpty()) {
+            System.out.println("No appointments available.");
+            return;
+        }
+
         LocalDate date = InputHandler.getDateInput("Enter Appointment Date: ");
-        boolean found = false;
         for (Appointment a : appointmentList) {
             if (a.getAppointmentDate().equals(date)) {
                 a.displayInfo();
                 System.out.println("------------------------------------");
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No appointments found on: " + date);
-        }
+        System.out.println("No appointments found on: " + date);
     }
 
     public void completeAppointment() {
@@ -217,7 +199,7 @@ public class AppointmentService implements Manageable<Appointment>, Searchable, 
         boolean found = false;
         for (Appointment a : appointmentList) {
             if (a.getAppointmentId().equalsIgnoreCase(id)) {
-                a.complete(); // you already have this method in Appointment
+                a.complete();
                 System.out.println("Appointment marked as completed.");
                 found = true;
                 break;
