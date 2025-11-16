@@ -72,7 +72,6 @@ public class NurseService implements Manageable<Nurse>, Searchable {
         }
     }
 
-
     @Override
     public List<Nurse> getAll() {
         if (nursesList.isEmpty()) {
@@ -269,9 +268,7 @@ public class NurseService implements Manageable<Nurse>, Searchable {
                 break;
             }
         }
-        if (patientToAssign != null && nurseToAssign != null) {
             nurseToAssign.assignPatient(patientToAssign);
-        }
     }
 
     public static Boolean checkById(String id) {

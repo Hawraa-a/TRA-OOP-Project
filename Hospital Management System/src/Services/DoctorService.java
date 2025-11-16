@@ -421,9 +421,7 @@ public class DoctorService implements Manageable<Doctor>, Searchable {
                 break;
             }
         }
-        if (doctorToAssign != null && patientToAssign != null) {
             doctorToAssign.assignPatient(patientToAssign);
-        }
     }
 
     public Doctor addDoctor(String name, String specialization, String phone) {
